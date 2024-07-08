@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Dummy Banking System" />
+        <title>
+            {% block head_title %}Banking System{% endblock %}
+        </title>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+        {% block head_extra %}{% endblock %}
+        <style>
+            footer {
+                position: fixed !important;
+                bottom: 0 !important;
+                width: 100%;
+            }
+            @keyframes marquee {
+                0% { transform: translateX(100%); }
+                100% { transform: translateX(-100%); }
+              }
+              
+              .marquee {
+                width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+                box-sizing: border-box;
+              }
+              
+              .marquee span {
+                display: inline-block;
+                padding-left: 100%;
+                animation: marquee 30s linear infinite;
+              }
+              
+        </style>
+    </head>
+    <body class="bg-indigo-600">
+        {% include 'navbar.html' %}
+        <div class="marquee bg-blue-900 text-white py-2 ">
+            <span>Welcome to Mamar Bank! Enjoy our services and have a great day! We offer competitive loan rates, easy deposit options, and fast withdrawal services. Stay financially secure with Mamar Bank's robust banking solutions!</span>
+        </div>
+        {% block body %}
+            <div class="lg:container lg:mx-auto" id="main">
+                {% include 'messages.html' %}
+                {% block content %}
+                {% endblock %}
+            </div>
+            {% include 'footer.html' %}
+
+        {% endblock %}
+    </body>
+
+</html>
