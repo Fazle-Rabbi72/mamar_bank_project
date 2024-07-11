@@ -22,6 +22,7 @@ from transactions.forms import (
 )
 from transactions.models import Transaction
 from django.contrib.auth.models import User
+from accounts.models import UserBankAccount
 
 def send_transaction_mail(user,amount,subject,template):
     
@@ -190,29 +191,30 @@ def transfer_money(request):
     if request.method == 'POST':
         form = TransferForm(request.POST)
         if form.is_valid():
-            recipient_username = form.cleaned_data['recipient_username']
+            recipient_account_number = form.cleaned_data['recipient_account_number']
             amount = form.cleaned_data['amount']
             try:
-                recipient = User.objects.get(username=recipient_username)
+                recipient_account = UserBankAccount.objects.get(account_no=recipient_account_number)
                 if request.user.account.balance >= amount:
                     request.user.account.balance -= amount
-                    recipient.account.balance += amount
+                    recipient_account.balance += amount
                     request.user.account.save()
-                    recipient.account.save()
+                    recipient_account.save()
                     Transaction.objects.create(
                         account=request.user.account,
-                        recipient_account=recipient.account,
+                        recipient_account=recipient_account,
                         amount=amount,
                         balance_after_transaction=request.user.account.balance,
-                        transaction_type=5 
+                        transaction_type=5
                     )
-                    send_transaction_mail2(request.user, recipient, amount)
+                    send_transaction_mail2(request.user, recipient_account.user, amount)
                     messages.success(request, 'Transfer successful.')
                 else:
                     messages.error(request, 'Insufficient balance.')
-            except User.DoesNotExist:
+            except UserBankAccount.DoesNotExist:
                 messages.error(request, 'Recipient account not found.')
             return redirect('transfer_money')
     else:
         form = TransferForm()
     return render(request, 'transactions/transfer.html', {'form': form})
+

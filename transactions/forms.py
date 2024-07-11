@@ -48,5 +48,5 @@ class LoanRequestForm(TransactionForm):
         return amount
     
 class TransferForm(forms.Form):
-    recipient_username = forms.CharField(max_length=100, label="Recipient Username")
+    recipient_account_number = forms.CharField(max_length=100, label="Recipient Account Number")
     amount = forms.DecimalField(max_digits=10, decimal_places=2, label="Amount")

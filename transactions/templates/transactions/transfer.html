@@ -12,12 +12,12 @@
             {% csrf_token %}
             
             <div class="mb-4">
-                <label for="recipient_username" class="block text-gray-700 text-sm font-bold mb-2">Recipient Username</label>
-                <input id="recipient_username" type="text" name="recipient_username"
+                <label for="recipient_account_number" class="block text-gray-700 text-sm font-bold mb-2">Recipient Account Number</label>
+                <input id="recipient_account_number" type="text" name="recipient_account_number"
                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                       placeholder="Recipient Username" required>
-                {% if form.recipient_username.errors %}
-                    {% for error in form.recipient_username.errors %}
+                       placeholder="Recipient Account Number" required>
+                {% if form.recipient_account_number.errors %}
+                    {% for error in form.recipient_account_number.errors %}
                         <p class="text-red-600 text-sm italic">{{ error }}</p>
                     {% endfor %}
                 {% endif %}

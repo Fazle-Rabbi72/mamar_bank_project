@@ -59,6 +59,7 @@ class UserRegistrationForm(UserCreationForm):
                     'focus:bg-white focus:border-gray-500'
                 ) 
             })
+            
 # profile ki ki jinis update korte parbe amader user
 
 class UserUpdateForm(forms.ModelForm):
