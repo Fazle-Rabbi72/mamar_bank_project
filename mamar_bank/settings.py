@@ -14,10 +14,14 @@ from pathlib import Path
 import environ
 import dj_database_url
 env = environ.Env()
+import os
 environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+# Use the PORT environment variable
+PORT = os.environ.get("PORT", 8000)  # Fallback to 8000 if no PORT is defined
 
 # Your secret key
 SECRET_KEY = env("SECRET_KEY")
