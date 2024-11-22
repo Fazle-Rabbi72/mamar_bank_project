@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import environ
-import dj_database_url
 env = environ.Env()
 import os
 environ.Env.read_env()
@@ -87,12 +86,12 @@ WSGI_APPLICATION = 'mamar_bank.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # DATABASES = {
 #     'default': {
@@ -104,12 +103,12 @@ WSGI_APPLICATION = 'mamar_bank.wsgi.application'
 #         'PORT': env("DB_PORT"),
 #     }
 # }
-DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://mamarbank_jb2n_user:gMjXj0zTSThpU0RnOYaituoLjcMKBQrJ@dpg-cq65f0iju9rs73e1gi90-a.oregon-postgres.render.com/mamarbank_jb2n',
-    )
-}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         # Replace this value with your local database's connection string.
+#         default='postgresql://mamarbank_jb2n_user:gMjXj0zTSThpU0RnOYaituoLjcMKBQrJ@dpg-cq65f0iju9rs73e1gi90-a.oregon-postgres.render.com/mamarbank_jb2n',
+#     )
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -158,4 +157,3 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER =env("EMAIL")
 EMAIL_HOST_PASSWORD =env("EMAIL_PASSWORD")
-DEFAULT_FROM_EMAIL =env("DEFAULT_EMAIL")
